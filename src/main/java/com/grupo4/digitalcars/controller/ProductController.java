@@ -133,11 +133,54 @@ public class ProductController {
     }
 
 
+    @GetMapping("/searchByTransmissionAndKeyword/{transmissionId}/{keyword}")
+    public ResponseEntity<List<Product>> searchProductsByTransmissionAndKeyword(
+            @PathVariable Transmission transmissionId, 
+            @PathVariable String keyword) {
+
+        List<Product> productsSearch = prodctService.getProductsByTransmissionAndKeyword(transmissionId, keyword);
+        if (!productsSearch.isEmpty()) {
+            return ResponseEntity.ok(productsSearch);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @GetMapping("/searchByCategoryAndKeyword/{categoryId}/{keyword}")
+    public ResponseEntity<List<Product>> searchProductsByCategoryAndKeyword(
+            @PathVariable Category categoryId, 
+            @PathVariable String keyword) {
+    
+        List<Product> productsSearch = prodctService.getProductsByCategoryAndKeyword(categoryId, keyword);
+        if (!productsSearch.isEmpty()) {
+            return ResponseEntity.ok(productsSearch);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+    
+    @GetMapping("/searchByCategoryKeywordAndDateRange/{categoryId}/{keyword}/{startDate}/{endDate}")
+    public ResponseEntity<List<Product>> searchProductsByCategoryKeywordAndDateRange(
+            @PathVariable Category categoryId, 
+            @PathVariable String keyword,
+            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, 
+            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
+    
+        List<Product> productsSearch = prodctService.getProductsByCategoryKeywordAndDateRange(categoryId, keyword, startDate, endDate);
+        if (!productsSearch.isEmpty()) {
+            return ResponseEntity.ok(productsSearch);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+    
 
     @GetMapping("findAll/random")
     public ResponseEntity<List<Product>> findAllRandom(){
         return ResponseEntity.ok(prodctService.getRandomProduct());
     }
+
+
 
 }
 

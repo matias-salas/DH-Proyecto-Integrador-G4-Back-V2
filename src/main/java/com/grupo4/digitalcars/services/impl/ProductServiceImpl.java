@@ -71,6 +71,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> getProductsByTransmissionAndKeyword(Transmission transmissionId, String keyword) {
+        return productRepository.findByTransmissionAndKeyword(transmissionId, keyword);
+    }
+
+
+    @Override
+    public List<Product> getProductsByCategoryAndKeyword(Category categoryId, String keyword) {
+        return productRepository.findByCategoryAndKeyword(categoryId, keyword);
+    }
+
+
+    @Override
+    public List<Product> getProductsByCategoryKeywordAndDateRange(Category categoryId, String keyword, LocalDate startDate, LocalDate endDate) {
+        return productRepository.findByCategoryKeywordAndDateRange(categoryId, keyword, startDate, endDate);
+    }
+
+    @Override
     public List<Product> getRandomProduct() {
         return productRepository.getRandomProduct();
     }

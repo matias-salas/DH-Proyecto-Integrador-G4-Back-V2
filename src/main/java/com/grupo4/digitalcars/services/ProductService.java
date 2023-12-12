@@ -20,6 +20,9 @@ public interface ProductService {
     List<Product> getProductsByTransmissionAndRangeDate(Integer transmission_id, LocalDate check_in_date, LocalDate check_out_date);
     List<Product> getProductsByKeywordAndDateRange(String keyword, LocalDate startDate, LocalDate endDate);
     List<Product> findByKeyword(String keyword);
+    List<Product> getProductsByTransmissionAndKeyword(Transmission transmissionId, String keyword);
+    List<Product> getProductsByCategoryAndKeyword(Category categoryId, String keyword);
+    List<Product> getProductsByCategoryKeywordAndDateRange(Category categoryId, String keyword, LocalDate startDate, LocalDate endDate);
 
     List<Product> getRandomProduct();
 
