@@ -66,6 +66,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findByKeyword(String keyword) {
+        return productRepository.findByKeyword(keyword);
+    }
+
+    @Override
     public List<Product> getRandomProduct() {
         return productRepository.getRandomProduct();
     }

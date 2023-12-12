@@ -122,6 +122,18 @@ public class ProductController {
     }
 
 
+    @GetMapping("/searchProducts/{keyword}")
+    public ResponseEntity<List<Product>> searchProductsByKeyword(@PathVariable String keyword) {
+        List<Product> products = prodctService.findByKeyword(keyword);
+        if (!products.isEmpty()) {
+            return ResponseEntity.ok(products);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+
+
     @GetMapping("findAll/random")
     public ResponseEntity<List<Product>> findAllRandom(){
         return ResponseEntity.ok(prodctService.getRandomProduct());

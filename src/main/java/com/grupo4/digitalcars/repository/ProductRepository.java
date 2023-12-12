@@ -26,6 +26,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query(value = "SELECT P.* FROM product P WHERE (P.address LIKE %?1% OR P.name LIKE %?1% OR P.description LIKE %?1%) AND P.id NOT IN (SELECT DISTINCT R.product_id FROM reservation R WHERE (R.checkout_date >= ?2 AND R.check_in_date <= ?3))", nativeQuery = true)
     List<Product> findByKeywordAndDateRange(String keyword, LocalDate checkInDate, LocalDate checkOutDate);
+
+    @Query(value = "SELECT P.* FROM product P WHERE P.address LIKE %?1% OR P.name LIKE %?1% OR P.description LIKE %?1%", nativeQuery = true)
+    List<Product> findByKeyword(String keyword);
     
 }
 
