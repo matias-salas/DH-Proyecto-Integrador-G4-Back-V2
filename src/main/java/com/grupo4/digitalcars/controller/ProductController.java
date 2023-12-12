@@ -106,10 +106,27 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @GetMapping("/searchProducts/{keyword}/{startDate}/{endDate}")
+    public ResponseEntity<List<Product>> searchProductsByKeywordAndDateRange(
+        @PathVariable String keyword, 
+        @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, 
+        @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
+
+        List<Product> productsSearch = prodctService.getProductsByKeywordAndDateRange(keyword, startDate, endDate);
+        if (!productsSearch.isEmpty()) {
+            return ResponseEntity.ok(productsSearch);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+
     @GetMapping("findAll/random")
     public ResponseEntity<List<Product>> findAllRandom(){
         return ResponseEntity.ok(prodctService.getRandomProduct());
     }
+
 }
 
 

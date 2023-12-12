@@ -18,6 +18,7 @@ public interface ProductService {
     List<Product>getProductsByTransmission(Transmission id);
     List<Product> getProductsByRangeDate(LocalDate check_in_date, LocalDate check_out_date);
     List<Product> getProductsByTransmissionAndRangeDate(Integer transmission_id, LocalDate check_in_date, LocalDate check_out_date);
+    List<Product> getProductsByKeywordAndDateRange(String keyword, LocalDate startDate, LocalDate endDate);
 
     List<Product> getRandomProduct();
 

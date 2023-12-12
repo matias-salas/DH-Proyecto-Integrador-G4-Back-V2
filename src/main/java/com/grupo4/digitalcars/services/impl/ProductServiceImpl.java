@@ -59,6 +59,12 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductsByTransmissionAndRangeDate(Integer transmission_id, LocalDate check_in_date, LocalDate check_out_date) {
         return productRepository.getByTransmissionAndRangeDate(transmission_id, check_in_date,check_out_date);
     }
+
+    @Override
+    public List<Product> getProductsByKeywordAndDateRange(String keyword, LocalDate startDate, LocalDate endDate) {
+        return productRepository.findByKeywordAndDateRange(keyword, startDate, endDate);
+    }
+
     @Override
     public List<Product> getRandomProduct() {
         return productRepository.getRandomProduct();
